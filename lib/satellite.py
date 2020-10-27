@@ -1,21 +1,19 @@
 from os import system, name
 
-
 chosen_merch = None
 chosen_buy = None
 
-# Clear screen function
-def clear():
+
+def clear():  # Clear screen function
     # for windows users
     if name == 'nt':
         _ = system('cls')
-
         # for mac and linux users (here, os.name is 'posix')
     else:
         _ = system('clear')
 
-# choices
-def job_choice():
+
+def job_choice():  # choices
     job = ""
 
     def choose_job():
@@ -30,4 +28,3 @@ def job_choice():
     if selected_job == 2:
         job = "Merchant"
     return job
-
