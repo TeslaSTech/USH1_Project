@@ -3,5 +3,4 @@
 def main():
     # put the code here
     def farm_choice():
-        print("Placeholder text")
-        # things
+        print("What will you be a farmer of?\n1) ")
