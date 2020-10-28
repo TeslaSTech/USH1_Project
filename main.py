@@ -12,9 +12,9 @@ print("Welcome to Connecticut! You will have the opportunity to meet people and 
 of the mid 18th century.\nThe year is 1768, your name is Henry Smith and you are 17 years old.")
 print("\n")
 JOB = job_choice()  # found in satellite.py
-if JOB == "Merchant":
+if JOB == 2:
     merchant.main()
-elif JOB == "Farmer":
+elif JOB == 1:
     farmer.main()
 else:
     print("Something went WRONG! Exiting program...")

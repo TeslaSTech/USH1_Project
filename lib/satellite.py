@@ -31,9 +31,5 @@ def job_choice():  # choices
             print("\nPlease input a valid job value\n")
             chosen_job = choose_job()
         return chosen_job
-    selected_job = choose_job()
-    if selected_job == 1:
-        job = "Farmer"
-    if selected_job == 2:
-        job = "Merchant"
+    job = choose_job()
     return job
