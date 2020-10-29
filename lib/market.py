@@ -1,3 +1,2 @@
-
 def main():
     print("Text")
