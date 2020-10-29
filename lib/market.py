@@ -24,6 +24,7 @@ class Market:
                        tablefmt="grid"))
 
 
+
 def main():
     Market.welcome()
     Market.menu_display()
