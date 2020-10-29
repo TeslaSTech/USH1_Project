@@ -1,7 +1,8 @@
 # merchant.py
 # Written by Valmik Revankar
 
-import csv
+from random import randint
+
 
 class Merchant:
 	price_multiplier = [0, 0]
@@ -30,6 +31,9 @@ class Merchant:
 		Merchant.set_segment(Merchant.chosen_merch)
 
 
+	def generate_random_price(self):
+		return randint(Merchant.price_multiplier[0], Merchant.price_multiplier[1])
+
 
 def debug():
 	Merchant.choose_merch()
@@ -37,3 +41,9 @@ def debug():
 		input("\n\nHit ENTER to update market segment")
 		Merchant.update_market_segment()
 		print("New market segment is " + str(Merchant.market_segment) + ". Prices in your field (number " + str(Merchant.chosen_merch) + ") range from " + str(Merchant.price_multiplier[0]) + " to " + str(Merchant.price_multiplier[1]) + " euros.")
+
+
+def main():
+	Merchant.choose_merch()
+	input("Now that you're all set up, hit ENTER to go to the market.")
+	# market stuff here
