@@ -12,9 +12,6 @@ def choose_farm():
         print("\nPlease enter a valid farm value\n")
         choose_farm()
     return chosen_farm
-
-
-def main():
     farm = choose_farm()
 
     # deal with choices and force user to go to the market
@@ -26,3 +23,7 @@ def main():
         input("\nYou have a few cattle and sheep, but most of your farm is for beans, corn, pumpkins, squash, "
               "and rye. Today you need to go into the market and buy some items\nPress ENTER to go to the Market")
         market.main()
+
+
+def main():
+    choose_farm()
