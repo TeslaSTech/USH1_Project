@@ -9,8 +9,7 @@ clear()
 
 # now the fun begins
 print("Welcome to Connecticut! You will have the opportunity to meet people and live life like the colonists \
-of the mid 18th century.\nThe year is 1768, your name is Henry Smith and you are 17 years old.")
-print("\n")
+of the mid 18th century.\nThe year is 1768, your name is Henry Smith and you are 17 years old.\n")
 JOB = job_choice()  # found in satellite.py
 if JOB == 2:
     merchant.main()
