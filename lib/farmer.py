@@ -3,18 +3,18 @@
 
 import lib.market as market
 
+
+# choose the type of farm
+def choose_farm():
+    chosen_farm = int(input("What will your farm mostly be for?\n1) livestock \n2) crops\nEnter your choice (1 or "
+                            "2) "))
+    if chosen_farm != 1 and chosen_farm != 2:
+        print("\nPlease enter a valid farm value\n")
+        choose_farm()
+    return chosen_farm
+
+
 def main():
-    farm = None
-
-    # choose the type of farm
-    def choose_farm():
-        chosen_farm = int(input("What will your farm mostly be for?\n1) livestock \n2) crops\nEnter your choice (1 or "
-                                "2) "))
-        if chosen_farm != 1 and chosen_farm != 2:
-            print("\nPlease enter a valid farm value\n")
-            choose_farm()
-        return chosen_farm
-
     farm = choose_farm()
 
     # deal with choices and force user to go to the market
