@@ -1,5 +1,6 @@
 from tabulate import tabulate
 
+
 class Market:
     @staticmethod
     def welcome():
@@ -21,6 +22,7 @@ class Market:
     def menu_display():
         print(tabulate([["value1", "value2"], ["value3", "value4"], ["value5", "value6"]], ["Item", "Price", "Tax"],
                        tablefmt="grid"))
+
 
 def main():
     Market.welcome()
