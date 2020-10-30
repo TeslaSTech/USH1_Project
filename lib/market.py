@@ -1,5 +1,5 @@
 from tabulate import tabulate
-
+import lib.saves_proc as sp
 
 class Market:
     @staticmethod
@@ -13,8 +13,9 @@ class Market:
             input("\nSince this is your first time here, let me give you a quick rundown on how things work here.\nI "
                   "will shorty provide you with a menu, and from that menu you can buy things that you need in order "
                   "to sustain yourself.\nThrough the credit system recently adapted here, you do not have to have your "
-                  "pay ready at the moment you buy the item.\nBe careful not to get into too much debt! \nPress ENTER "
-                  "to view the menus. ")
+                  "pay ready at the moment you buy the item.\nRemember, you need food for the winter, so don't leave "
+                  "this market for the first time without buying something\nBe careful not to get into too much debt!"
+                  "\nPress ENTER to view the menus. ")
         elif x == 'n':
             temp = input("Well, you already know what to do. \nPress ENTER to view the menus")
 
@@ -27,13 +28,13 @@ class Market:
             tablefmt="grid"))
 
     @staticmethod
-    def buy():
-        item = input(int("Enter the No. of your desired item to begin the transaction... "))
+    def buy(debt):
+        item = int(input("Enter the No. of your desired item to begin the transaction... "))
         while item != 1 and item != 2 and item != 3 and item != 4 and item != 5 and item != 6:
             print("\nPlease enter a number from 1-6")
-            item = input(int("Enter the No. of your desired item to begin the transaction... "))
+            item = int(input("Enter the No. of your desired item to begin the transaction... "))
 
-        number = input(int("How many of this item will you be purchasing?"))
+        number = int(input("How many of this item will you be purchasing? "))
 
         if item == 1:
             cost = number * 0.60
@@ -51,13 +52,41 @@ class Market:
             "Wow, something went seriously wrong and you managed to break the program. I guess you won!"
             exit()
 
+        debt -= cost
+        return debt
+
     @staticmethod
-    def sell():
-        item = input("Enter the No. of your desired item to begin the transaction... ")
+    def sell(debt):
+        item = int(input("Enter the No. of your desired item to begin the transaction... "))
+        while item != 1 and item != 2 and item != 3 and item != 4 and item != 5 and item != 6:
+            print("\nPlease enter a number from 1-6")
+            item = int(input("Enter the No. of your desired item to begin the transaction... "))
 
+        number = int(input("How many of this item will you be selling? "))
 
+        if item == 1:
+            profit = number * 0.60
+        elif item == 2:
+            profit = number
+        elif item == 3:
+            profit = number * 0.75
+        elif item == 4:
+            profit = number * 1.5
+        elif item == 5:
+            profit = number * 0.0625
+        elif item == 6:
+            profit = number * 0.14
+        else:
+            "Wow, something went seriously wrong and you managed to break the program. I guess you won!"
+            exit()
+        debt += profit
+        return debt
 
 def main():
+    save_file = "saves/player.sf"
+
+    debt = 0
+
     Market.welcome()
 
     Market.menu_display()
@@ -68,6 +97,7 @@ def main():
         buy_or_sell = input("Will you be buying or selling? (b/s) ")
 
     if buy_or_sell == "b":
-        Market.buy()
+        debt = Market.buy()
     elif buy_or_sell == "s":
-        Market.sell()
+        debt = Market.sell()
+

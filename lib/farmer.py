@@ -2,7 +2,7 @@
 # Written by Muhammad Ibrahim
 
 import lib.market as market
-
+import lib.saves_proc as sp
 
 class Farmer:
     # choose the type of farm
@@ -19,12 +19,15 @@ class Farmer:
             input(
                 "\nYour farm has 4 horses, 25 cattle, 15 sheep, and 13 pigs. Today you need to go into the market and "
                 "buy some items.\nPress ENTER to go to the Market")
-            market.main()
         elif farm == 2:
             input("\nYou have a few cattle and sheep, but most of your farm is for beans, corn, squash, and wheat. "
                   "Today you need to go into the market and buy some items\nPress ENTER to go to the Market")
-            market.main()
 
 
 def main():
+    save_game_values = {'Debt': 0}
+    save_file = "saves/player.sf"
+    sp.write_dict(save_file, save_game_values)
+
     Farmer.choose_farm()
+    market.main()
