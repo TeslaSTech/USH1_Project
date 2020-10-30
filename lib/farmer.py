@@ -3,6 +3,7 @@
 
 import lib.market as market
 import lib.saves_proc as sp
+import time
 
 class Farmer:
     # choose the type of farm
@@ -31,3 +32,24 @@ def main():
 
     Farmer.choose_farm()
     market.main()
+
+    print(".........................................................................................")
+    time.sleep(5)
+    print("Some time has passed. The winter is almost upon us, and there is still time to stock up on item you might"
+          " need.\nHopefully, you have been keeping track of your debt, and you have sold enough of your crop yield to "
+          "stay in the black. \nYou now have two choices. You can choose to finish the game, or go to the market one "
+          "last time and try to get out of debt.")
+    temp = input("Go back to the market? (y/n) ")
+    while temp != "y" and temp != "n":
+        print("\nPlease enter either y or n")
+        temp = input("Go back to the market? (y/n) ")
+
+    if temp == "y":
+        print("Taking you to the market...")
+        time.sleep(3)
+        market.main()
+    if temp == "n":
+        print("If you're sure...")
+        time.sleep(3)
+
+    print()
