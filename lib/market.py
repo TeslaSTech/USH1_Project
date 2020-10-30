@@ -1,3 +1,5 @@
+from os import system, name
+
 from tabulate import tabulate
 import lib.saves_proc as sp
 
@@ -10,7 +12,7 @@ class Market:
             print("Please enter y or n\n")
             Market.welcome()
         elif x == 'y':
-            input("\nSince this is your first time here, let me give you a quick rundown on how things work here.\nI "
+            input("\nSince this is your first time, let me give you a quick rundown on how things work here.\nI "
                   "will shortly provide you with a menu, and from that menu you can buy things that you need in order "
                   "to sustain yourself.\nThrough the credit system recently adapted here, you do not have to have your "
                   "pay ready at the moment you buy the item.\nRemember, you need food for the winter, so don't leave "
@@ -22,8 +24,9 @@ class Market:
     @staticmethod
     def menu_display():
         print(tabulate(
-            [["1", "Wheat per bushel", "0.60"], ["2", "Corn per bushel", "1.00"], ["3", "Rye per bushel", "0.75"],
-             ["4", "Beans per bushel", "1.50"], ["5", "Pork per pound", "0.06¼"], ["6", "Salt shad", "0.14"]],
+            [["1", "Wheat (per bushel)", "0.60"], ["2", "Corn (per bushel)", "1.00"], ["3", "Rye (per bushel)", "0.75"],
+             ["4", "Beans (per bushel)", "1.50"], ["5", "Pork (per pound)", "0.06¼"], ["6", "Salt shad", "0.14"],
+             ["7", "Broadcloth (per yard", "2.50"], ["8", "Firearms", "100"], ["9", "Land (plot)", "1,200.00"]]
             ["No.", "Item", "Price"],
             tablefmt="grid"))
 
@@ -80,6 +83,8 @@ class Market:
             "Wow, something went seriously wrong and you managed to break the program. I guess you won!"
             exit()
         debt += profit
+
+        print("TRANSACTION CONNECT")
         return debt
 
     @staticmethod
@@ -129,5 +134,7 @@ def main():
             debt = Market.buy(debt)
         elif buy_or_sell == "s":
             debt = Market.sell(debt)
+
+        Market.ask_to_keep_going()
 
     sp.write_dict(save_file, {"Debt": debt})
