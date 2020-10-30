@@ -66,15 +66,20 @@ def main():
 
 
 def back_from_market():
+	times_ran = 0
 	save_file = "saves/merchant.sf"
 	Exit = False
 	while not Exit:
 		Merchant.market_savefile = sp.read_dict(Merchant.market_file)
 		print("You came back from the market with a balance of " + str(Merchant.market_savefile['Debt']) + " pounds.")
 		if Merchant.market_savefile['Debt'] < 0:
-			print("You're in debt! You need to pay this off immediately by selling some items. Back to the market with you!")
-			time.sleep(2)
-			market.main()
+			return_to_market = str(input("You're in debt! Do you want to go back and sell, or is this fine? Keep in mind that if it's been a while, you might have to go back anyway.(y/n)"))
+			if times_ran % 3 == 0 or return_to_market == "y":
+				if times_ran % 3 == 1:
+					print("The time has come to pay your debt. Please go to the market.")
+				time.sleep(2)
+				market.main()
+				times_ran += 1
 		save_game_values = sp.read_dict(save_file)
 		if not save_game_values['ItemsSold'] % 4 == 0 and Merchant.market_segment < 4:
 			Merchant.update_market_segment()
@@ -91,3 +96,4 @@ def back_from_market():
 		print("Good morning!")
 		input("Press ENTER to go to the market. ")
 		market.main()
+		times_ran += 1
