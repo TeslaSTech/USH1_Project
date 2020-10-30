@@ -82,6 +82,18 @@ class Market:
         debt += profit
         return debt
 
+    @staticmethod
+    def ask_to_keep_going():
+        keep_going = input("Would you like to stay in the market? (y/n) ")
+        while keep_going != "y" and keep_going != "n":
+            print("\nPlease enter either y or n")
+            keep_going = input("\nWould you like to stay in the market? (y/n) ")
+        if keep_going == "y":
+            return True
+        if keep_going == "n":
+            return False
+
+
 def main():
     save_file = "saves/market.sf"
 
@@ -100,5 +112,22 @@ def main():
         debt = Market.buy(debt)
     elif buy_or_sell == "s":
         debt = Market.sell(debt)
+
+    # let them stay for as long as they want
+    keep_going = Market.ask_to_keep_going()
+
+    while keep_going:
+        print("\n")
+        Market.menu_display()
+
+        buy_or_sell = input("Will you be buying or selling? (b/s) ")
+        while buy_or_sell != "b" and buy_or_sell != "s":
+            print("\nPlease enter a value b or s")
+            buy_or_sell = input("Will you be buying or selling? (b/s) ")
+
+        if buy_or_sell == "b":
+            debt = Market.buy(debt)
+        elif buy_or_sell == "s":
+            debt = Market.sell(debt)
 
     sp.write_dict(save_file, {"Debt": debt})
