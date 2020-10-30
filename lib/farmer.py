@@ -29,19 +29,9 @@ class Farmer:
             return 2
 
 def main():
-    merchant_tracking = "saves/merchant.sf"
-    merchant_list = sp.read_dict(merchant_tracking)
-    merchant_list['MerchantType'] = 0
-    merchant_list['ItemsSold'] = 0
-    merchant_list['MoneyInPossession'] = 0
-    save_game_values = {
-        'FarmerType': 0
-    }
     save_file = "saves/farmer.sf"
-    sp.write_dict(save_file, save_game_values)
-
     farm_type = Farmer.choose_farm()
-    save_game_values['FarmerType'] = farm_type
+    save_game_values = {'FarmerType': farm_type}
     sp.write_dict(save_file, save_game_values)
     time.sleep(2)
     market.main()

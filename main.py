@@ -9,6 +9,20 @@ clear()
 
 JOB_tracking = "saves/player.sf"
 
+# clear previous saves
+empty = {}
+merchant_tracking = "saves/merchant.sf"
+sp.write_dict(merchant_tracking, empty)
+
+farmer_tracking = "saves/farmer.sf"
+sp.write_dict(farmer_tracking, empty)
+
+market_tracking = "saves/market.sf"
+sp.write_dict(market_tracking, empty)
+
+player_tracking = "saves/player.sf"
+sp.write_dict(player_tracking, empty)
+
 # now the fun begins
 print("Welcome to Connecticut! You will have the opportunity to meet people and live life like the colonists \
 of the mid 18th century.\nThe year is 1768, your name is Henry Smith and you are 17 years old.\n")
