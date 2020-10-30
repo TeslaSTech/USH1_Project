@@ -3,7 +3,7 @@
 
 from random import randint
 import lib.saves_proc as sp
-
+import lib.market as market
 
 
 class Merchant:
@@ -47,10 +47,22 @@ def debug():
 
 def main():
 	save_game_values = {
-		'ItemsSold': 0
+		'ItemsSold': 0,
+		'MoneyInPossession': 0,
+		'MerchantType': Merchant.chosen_merch
 	}
 	save_file = "saves/merchant.sf"
 	sp.write_dict(save_file, save_game_values)
 	Merchant.choose_merch()
+	save_game_values['MerchantType'] = Merchant.chosen_merch
+	sp.write_dict(save_file, save_game_values)
 	input("Now that you're all set up, hit ENTER to go to the market.")
-	# market stuff here
+	market.main()
+	save_game_values = sp.read_dict(save_file)
+	exit = False
+	while not exit:
+		if not save_game_values['ItemsSold'] % 2 == 0 and Merchant.market_segment < 4:
+			Merchant.update_market_segment()
+			print("Congrats! You've made your way up in the market. You can now sell higher quality goods or more valuable land.")
+		elif save_game_values['ItemsSold'] > 3:
+			print("You are already at the maximum tier of sales. Good on you!")

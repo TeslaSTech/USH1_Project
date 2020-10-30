@@ -3,7 +3,15 @@ from os import system, name
 from tabulate import tabulate
 import lib.saves_proc as sp
 
+
 class Market:
+    merchant_tracking = "saves/merchant.sf"
+    merchant_list = sp.read_dict(merchant_tracking)
+    JOB_tracking = "saves/player.sf"
+    JOB = sp.read_dict(JOB_tracking)
+
+    merchant_sales = 0
+
     @staticmethod
     def welcome():
         x = input("\nWelcome to the market! I'm Benedict. Is this your first time here? y/n ")
@@ -26,15 +34,15 @@ class Market:
         print(tabulate(
             [["1", "Wheat (per bushel)", "0.60"], ["2", "Corn (per bushel)", "1.00"], ["3", "Rye (per bushel)", "0.75"],
              ["4", "Beans (per bushel)", "1.50"], ["5", "Pork (per pound)", "0.06¼"], ["6", "Salt shad", "0.14"],
-             ["7", "Broadcloth (per yard", "2.50"], ["8", "Firearms", "100"], ["9", "Land (plot)", "1,200.00"]]
+             ["7", "Broadcloth (per yard", "2.50"], ["8", "Firearms", "100"], ["9", "Land (plot)", "1,200.00"]],
             ["No.", "Item", "Price"],
             tablefmt="grid"))
 
     @staticmethod
     def buy(debt):
         item = int(input("Enter the No. of your desired item to begin the transaction... "))
-        while item != 1 and item != 2 and item != 3 and item != 4 and item != 5 and item != 6:
-            print("\nPlease enter a number from 1-6")
+        while item != 1 and item != 2 and item != 3 and item != 4 and item != 5 and item != 6 and item != 7 and item != 8 and item != 9:
+            print("\nPlease enter a number from 1-9")
             item = int(input("Enter the No. of your desired item to begin the transaction... "))
 
         number = int(input("How many of this item will you be purchasing? "))
@@ -56,15 +64,18 @@ class Market:
             exit()
 
         debt -= cost
+        print("TRANSACTION COMPLETE")
         return debt
 
     @staticmethod
     def sell(debt):
         item = int(input("Enter the No. of your desired item to begin the transaction... "))
-        while item != 1 and item != 2 and item != 3 and item != 4 and item != 5 and item != 6:
-            print("\nPlease enter a number from 1-6")
+        while item != 1 and item != 2 and item != 3 and item != 4 and item != 5 and item != 6 and item != 7 and item != 8 and item != 9:
+            print("\nPlease enter a number from 1-9")
             item = int(input("Enter the No. of your desired item to begin the transaction... "))
-
+        while (item != Market.merchant_list['MerchantType'] + 6) or (Market.JOB['Job'] == 1 and (item == 7 or item == 8 or item == 9)):
+            print("You don't sell that...")
+            item = int(input("Enter the No. of your desired item to begin the transaction... "))
         number = int(input("How many of this item will you be selling? "))
 
         if item == 1:
@@ -81,10 +92,11 @@ class Market:
             profit = number * 0.14
         else:
             "Wow, something went seriously wrong and you managed to break the program. I guess you won!"
-            exit()
+            exit(-69)
         debt += profit
+        Market.merchant_sales += 1
+        print("TRANSACTION COMPLETE")
 
-        print("TRANSACTION CONNECT")
         return debt
 
     @staticmethod
@@ -102,6 +114,7 @@ class Market:
 def main():
     save_file = "saves/market.sf"
 
+
     debt = 0
 
     Market.welcome()
@@ -117,6 +130,7 @@ def main():
         debt = Market.buy(debt)
     elif buy_or_sell == "s":
         debt = Market.sell(debt)
+        Market.merchant_list['ItemsSold'] = Market.merchant_sales
 
     # let them stay for as long as they want
     keep_going = Market.ask_to_keep_going()
@@ -138,3 +152,4 @@ def main():
         Market.ask_to_keep_going()
 
     sp.write_dict(save_file, {"Debt": debt})
+    sp.write_dict(Market.merchant_tracking, Market.merchant_list)
