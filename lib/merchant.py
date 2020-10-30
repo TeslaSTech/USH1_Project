@@ -2,6 +2,8 @@
 # Written by Valmik Revankar
 
 from random import randint
+import lib.saves_proc as sp
+
 
 
 class Merchant:
@@ -44,6 +46,11 @@ def debug():
 
 
 def main():
+	save_game_values = {
+		'ItemsSold': 0
+	}
+	save_file = "saves/merchant.sf"
+	sp.write_dict(save_file, save_game_values)
 	Merchant.choose_merch()
 	input("Now that you're all set up, hit ENTER to go to the market.")
 	# market stuff here
