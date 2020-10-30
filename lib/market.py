@@ -9,7 +9,7 @@ class Market:
     merchant_tracking = "saves/merchant.sf"
     merchant_list = sp.read_dict(merchant_tracking)
     JOB_tracking = "saves/player.sf"
-    JOB = sp.read_dict(JOB_tracking)
+    job_list = sp.read_dict(JOB_tracking)
 
     merchant_sales = 0
 
@@ -83,7 +83,7 @@ class Market:
         while item != 1 and item != 2 and item != 3 and item != 4 and item != 5 and item != 6 and item != 7 and item != 8 and item != 9:
             print("\nPlease enter a number from 1-9")
             item = int(input("Enter the No. of your desired item to begin the transaction... "))
-        while (item != Market.merchant_list['MerchantType'] + 6) or (Market.JOB['Job'] == 1 and (item == 7 or item == 8 or item == 9)):
+        while (Market.job_list['Job'] == 2 and item != Market.merchant_list['MerchantType'] + 6) or (Market.job_list['Job'] == 1 and (item == 7 or item == 8 or item == 9)):
             print("You don't sell that...")
             item = int(input("Enter the No. of your desired item to begin the transaction... "))
         number = int(input("How many of this item will you be selling? "))
