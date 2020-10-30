@@ -79,6 +79,8 @@ class Market:
     @staticmethod
     def sell(debt):
         profit = 0
+        Market.merchant_list = sp.read_dict(Market.merchant_tracking)
+        Market.job_list = sp.read_dict(Market.JOB_tracking)
         item = int(input("Enter the No. of your desired item to begin the transaction... "))
         while item != 1 and item != 2 and item != 3 and item != 4 and item != 5 and item != 6 and item != 7 and item != 8 and item != 9:
             print("\nPlease enter a number from 1-9")
@@ -146,8 +148,14 @@ def main():
 
     if buy_or_sell == "b":
         debt = Market.buy(debt)
+        old_debt = sp.read_dict(save_file)
+        sp.write_dict(save_file, {"Debt": old_debt['Debt'] + debt})
+        sp.write_dict(Market.merchant_tracking, Market.merchant_list)
     elif buy_or_sell == "s":
         debt = Market.sell(debt)
+        old_debt = sp.read_dict(save_file)
+        sp.write_dict(save_file, {"Debt": old_debt['Debt'] + debt})
+        sp.write_dict(Market.merchant_tracking, Market.merchant_list)
         Market.merchant_list['ItemsSold'] = Market.merchant_sales
 
     # let them stay for as long as they want
@@ -164,12 +172,15 @@ def main():
 
         if buy_or_sell == "b":
             debt = Market.buy(debt)
+            sp.write_dict(save_file, {"Debt": debt})
+            sp.write_dict(Market.merchant_tracking, Market.merchant_list)
         elif buy_or_sell == "s":
             debt = Market.sell(debt)
+            sp.write_dict(save_file, {"Debt": debt})
+            sp.write_dict(Market.merchant_tracking, Market.merchant_list)
+
+
 
         wtkg = Market.ask_to_keep_going()
         if not wtkg:
             return
-
-    sp.write_dict(save_file, {"Debt": debt})
-    sp.write_dict(Market.merchant_tracking, Market.merchant_list)

@@ -7,6 +7,10 @@ import lib.market as market
 import time
 
 class Merchant:
+
+	market_file = "saves/market.sf"
+	market_savefile = sp.read_dict(market_file)
+
 	price_multiplier = [0, 0]
 	market_segment, chosen_merch = 1, 0
 
@@ -58,15 +62,27 @@ def main():
 	sp.write_dict(save_file, save_game_values)
 	input("Now that you're all set up, hit ENTER to go to the market.")
 	market.main()
-	save_game_values = sp.read_dict(save_file)
-	if not save_game_values['ItemsSold'] % 4 == 0 and Merchant.market_segment < 4:
-		Merchant.update_market_segment()
-		print("Congrats! You've made your way up in the market. You can now sell higher quality goods or more valuable land.")
-	elif save_game_values['ItemsSold'] > 3:
-		print("You are already at the maximum tier of sales. Good on you!")
-	while True:
+	back_from_market()
+
+
+def back_from_market():
+	save_file = "saves/merchant.sf"
+	Exit = False
+	while not Exit:
+		Merchant.market_savefile = sp.read_dict(Merchant.market_file)
+		print("You came back from the market with a balance of " + str(Merchant.market_savefile['Debt']) + " pounds.")
+		if Merchant.market_savefile['Debt'] < 0:
+			print("You're in debt! You need to pay this off immediately by selling some items. Back to the market with you!")
+			market.main()
+		save_game_values = sp.read_dict(save_file)
+		if not save_game_values['ItemsSold'] % 4 == 0 and Merchant.market_segment < 4:
+			Merchant.update_market_segment()
+			print("Congrats! You've made your way up in the market. You can now sell higher quality goods or more valuable land.")
+		elif save_game_values['ItemsSold'] > 3:
+			print("You are already at the maximum tier of sales. Good on you!")
 		exitS = str(input("Would you like to exit? (y/n)"))
 		if exitS == "y":
+			Exit = True
 			break
 		input("Press ENTER to sleep the night.")
 		print("Good night...")

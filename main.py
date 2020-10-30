@@ -18,7 +18,7 @@ farmer_tracking = "saves/farmer.sf"
 sp.write_dict(farmer_tracking, empty)
 
 market_tracking = "saves/market.sf"
-sp.write_dict(market_tracking, empty)
+sp.write_dict(market_tracking, {'Debt': 0})
 
 player_tracking = "saves/player.sf"
 sp.write_dict(player_tracking, empty)
