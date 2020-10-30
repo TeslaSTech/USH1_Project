@@ -21,7 +21,7 @@ class Farmer:
                 "\nYour farm has 4 horses, 25 cattle, 15 sheep, and 13 pigs. Today you need to go into the market and "
                 "buy some items.\nPress ENTER to go to the Market")
         elif farm == 2:
-            input("\nYou have a few cattle and sheep, but most of your farm is for beans, corn, squash, and wheat. "
+            input("\nYou have a few cattle, sheep, and pigs, but most of your farm is for beans, corn, squash, and wheat. "
                   "Today you need to go into the market and buy some items\nPress ENTER to go to the Market")
 
 
@@ -37,15 +37,17 @@ def main():
     time.sleep(5)
     print("Some time has passed. The winter is almost upon us, and there is still time to stock up on item you might"
           " need.\nHopefully, you have been keeping track of your debt, and you have sold enough of your crop yield to "
-          "stay in the black. \nYou now have two choices. You can choose to finish the game, or go to the market one "
-          "last time and try to get out of debt.")
+          "stay in the black. \nYou now have two choices. You can choose to finish the game, or go to sleep and visit"
+          " the market in the morning on last time to try and get out of any possible debt.")
     temp = input("Go back to the market? (y/n) ")
     while temp != "y" and temp != "n":
         print("\nPlease enter either y or n")
         temp = input("Go back to the market? (y/n) ")
 
     if temp == "y":
-        print("Taking you to the market...")
+        print("Goodnight")
+        time.sleep(5)
+        print("Good morning! Taking you to the market...")
         time.sleep(3)
         market.main()
     if temp == "n":
