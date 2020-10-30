@@ -2,6 +2,7 @@ from os import system, name
 
 from tabulate import tabulate
 import lib.saves_proc as sp
+import time
 
 
 class Market:
@@ -46,7 +47,7 @@ class Market:
             item = int(input("Enter the No. of your desired item to begin the transaction... "))
 
         number = int(input("How many of this item will you be purchasing? "))
-
+        cost = 0
         if item == 1:
             cost = number * 0.60
         elif item == 2:
@@ -70,11 +71,14 @@ class Market:
             exit(-2)
 
         debt -= cost
+        print("Completing your transaction...")
+        time.sleep(4)
         print("TRANSACTION COMPLETE")
         return debt
 
     @staticmethod
     def sell(debt):
+        profit = 0
         item = int(input("Enter the No. of your desired item to begin the transaction... "))
         while item != 1 and item != 2 and item != 3 and item != 4 and item != 5 and item != 6 and item != 7 and item != 8 and item != 9:
             print("\nPlease enter a number from 1-9")
@@ -97,16 +101,18 @@ class Market:
         elif item == 6:
             profit = number * 0.14
         elif item == 7:
-            cost = number * 2.5
+            profit = number * 2.5
         elif item == 8:
-            cost = number * 100
+            profit = number * 100
         elif item == 9:
-            cost = number * 1200
+            profit = number * 1200
         else:
             "Wow, something went seriously wrong and you managed to break the program. I guess you won!"
             exit(-2)
         debt += profit
         Market.merchant_sales += 1
+        print("Completing your transaction...")
+        time.sleep(4)
         print("TRANSACTION COMPLETE")
 
         return debt
