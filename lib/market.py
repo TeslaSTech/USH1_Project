@@ -167,7 +167,9 @@ def main():
         elif buy_or_sell == "s":
             debt = Market.sell(debt)
 
-        Market.ask_to_keep_going()
+        wtkg = Market.ask_to_keep_going()
+        if not wtkg:
+            return
 
     sp.write_dict(save_file, {"Debt": debt})
     sp.write_dict(Market.merchant_tracking, Market.merchant_list)

@@ -4,7 +4,7 @@
 from random import randint
 import lib.saves_proc as sp
 import lib.market as market
-
+import time
 
 class Merchant:
 	price_multiplier = [0, 0]
@@ -59,10 +59,18 @@ def main():
 	input("Now that you're all set up, hit ENTER to go to the market.")
 	market.main()
 	save_game_values = sp.read_dict(save_file)
-	exit = False
-	while not exit:
-		if not save_game_values['ItemsSold'] % 2 == 0 and Merchant.market_segment < 4:
-			Merchant.update_market_segment()
-			print("Congrats! You've made your way up in the market. You can now sell higher quality goods or more valuable land.")
-		elif save_game_values['ItemsSold'] > 3:
-			print("You are already at the maximum tier of sales. Good on you!")
+	if not save_game_values['ItemsSold'] % 4 == 0 and Merchant.market_segment < 4:
+		Merchant.update_market_segment()
+		print("Congrats! You've made your way up in the market. You can now sell higher quality goods or more valuable land.")
+	elif save_game_values['ItemsSold'] > 3:
+		print("You are already at the maximum tier of sales. Good on you!")
+	while True:
+		exitS = str(input("Would you like to exit? (y/n)"))
+		if exitS == "y":
+			break
+		input("Press ENTER to sleep the night.")
+		print("Good night...")
+		time.sleep(5)
+		print("Good morning!")
+		input("Press ENTER to go to the market. ")
+		market.main()
