@@ -7,6 +7,8 @@ import time
 
 
 class Farmer:
+    market_file = "saves/market.sf"
+    market_savefile = sp.read_dict(market_file)
     # choose the type of farm
     @staticmethod
     def choose_farm():
@@ -54,7 +56,13 @@ def main():
         time.sleep(3)
         market.main()
     if temp == "n":
-        print("If you're sure...")
-        time.sleep(3)
+        if Farmer.market_savefile['Debt'] < 0:
+            print(
+                "You're in debt! You need to pay this off immediately by selling some items. Back to the market with you!")
+            time.sleep(2)
+            market.main()
+        else:
+            print("Congrats, you are not in debt. Thanks for playing!")
+            time.sleep(3)
 
     print()

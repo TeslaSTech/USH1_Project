@@ -73,6 +73,7 @@ def back_from_market():
 		print("You came back from the market with a balance of " + str(Merchant.market_savefile['Debt']) + " pounds.")
 		if Merchant.market_savefile['Debt'] < 0:
 			print("You're in debt! You need to pay this off immediately by selling some items. Back to the market with you!")
+			time.sleep(2)
 			market.main()
 		save_game_values = sp.read_dict(save_file)
 		if not save_game_values['ItemsSold'] % 4 == 0 and Merchant.market_segment < 4:
