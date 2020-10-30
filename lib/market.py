@@ -11,7 +11,7 @@ class Market:
             Market.welcome()
         elif x == 'y':
             input("\nSince this is your first time here, let me give you a quick rundown on how things work here.\nI "
-                  "will shorty provide you with a menu, and from that menu you can buy things that you need in order "
+                  "will shortly provide you with a menu, and from that menu you can buy things that you need in order "
                   "to sustain yourself.\nThrough the credit system recently adapted here, you do not have to have your "
                   "pay ready at the moment you buy the item.\nRemember, you need food for the winter, so don't leave "
                   "this market for the first time without buying something\nBe careful not to get into too much debt!"
@@ -83,7 +83,7 @@ class Market:
         return debt
 
 def main():
-    save_file = "saves/player.sf"
+    save_file = "saves/market.sf"
 
     debt = 0
 
@@ -97,7 +97,8 @@ def main():
         buy_or_sell = input("Will you be buying or selling? (b/s) ")
 
     if buy_or_sell == "b":
-        debt = Market.buy()
+        debt = Market.buy(debt)
     elif buy_or_sell == "s":
-        debt = Market.sell()
+        debt = Market.sell(debt)
 
+    sp.write_dict(save_file, {"Debt": debt})

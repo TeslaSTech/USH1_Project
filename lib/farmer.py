@@ -26,7 +26,7 @@ class Farmer:
 
 def main():
     save_game_values = {'Debt': 0}
-    save_file = "saves/player.sf"
+    save_file = "saves/market.sf"
     sp.write_dict(save_file, save_game_values)
 
     Farmer.choose_farm()
